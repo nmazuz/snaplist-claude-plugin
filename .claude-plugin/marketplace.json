@@ -1,0 +1,32 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "snaplist",
+  "description": "The Snaplist plugin for Claude Code",
+  "owner": {
+    "name": "Niso Mazuz"
+  },
+  "metadata": {
+    "description": "Snaplist — Israeli supermarket shopping, price comparison and promotion scoring",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "snaplist",
+      "source": "./",
+      "description": "Sign in to Snaplist, set a home store, build lists from receipts or purchase history, compare basket prices, score promotions against price history and find better-value swaps.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Niso Mazuz"
+      },
+      "homepage": "https://app.snaplist.one",
+      "keywords": [
+        "snaplist",
+        "shopping",
+        "supermarket",
+        "israel",
+        "price-comparison"
+      ],
+      "category": "productivity"
+    }
+  ]
+}

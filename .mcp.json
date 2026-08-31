@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "snaplist": {
+      "type": "http",
+      "url": "https://api.snaplist.one/mcp"
+    }
+  }
+}

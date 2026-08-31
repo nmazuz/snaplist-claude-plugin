@@ -1,0 +1,18 @@
+{
+  "name": "snaplist",
+  "description": "Shop smarter at Israeli supermarkets: sign in to Snaplist, set a home store, build lists from receipts (photo, SMS link or a digital-receipt URL read directly), compare basket prices across chains, score promotions against real price history, and find better-value swaps.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Niso Mazuz"
+  },
+  "homepage": "https://app.snaplist.one",
+  "keywords": [
+    "snaplist",
+    "shopping",
+    "supermarket",
+    "israel",
+    "price-comparison",
+    "receipts",
+    "promotions"
+  ]
+}

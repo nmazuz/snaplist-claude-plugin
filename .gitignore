@@ -1,0 +1,9 @@
+.DS_Store
+*.log
+
+# Per-user runtime state. Routines keep their state under ~/.snaplist/, never in
+# the repo — but guard against a stray copy landing here.
+local-context.md
+state.json
+*.session
+.snaplist/

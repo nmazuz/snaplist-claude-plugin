@@ -1,0 +1,15 @@
+interface:
+  display_name: "Snaplist"
+  short_description: "השוואת מחירים ורשימות קניות חכמות"
+  default_prompt: "Use $snaplist to build and compare my supermarket shopping list."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "snaplist"
+      description: "Snaplist supermarket shopping and price-comparison MCP server"
+      transport: "streamable_http"
+      url: "https://api.snaplist.one/mcp"
+
+policy:
+  allow_implicit_invocation: true
