@@ -40,6 +40,10 @@ Fall back to this when any of the following is true:
 - every `qty` is `1` (the classic occurrence-count signature)
 - a quantity contradicts what the page plainly shows
 - the user says the import was wrong or incomplete
+- **the call errors outright** (e.g. `403 Forbidden`, timeout) instead of returning a
+  low-confidence result — some chains block the server-side fetcher's request even though the
+  same link opens fine in a real browser. Do not retry the tool more than once; go straight to
+  reading the page yourself.
 
 ## The procedure
 
@@ -187,5 +191,6 @@ where that puts them against the three-receipt threshold that unlocks
 | Page loads but no items | JS-rendered shell, or an expired link | Say so; ask the user to check the link still opens on their phone |
 | Link asks for a login or OTP | The receipt is behind the chain's auth | Stop. Never enter credentials; ask the user to open it and paste the items or use a photo receipt instead |
 | `import_digital_receipt` returns items but all `qty: 1` | Occurrence-count signature | Read the page yourself for real quantities |
+| `import_digital_receipt` errors with `403 Forbidden` (or similar) even though the user confirms the link opens for them | The chain's server blocks the server-side fetcher (bot/IP/session detection); it isn't about the link being dead | Skip retrying the tool; open the URL with `mcp__Claude_Browser__navigate` + `get_page_text` instead — a real browser session usually isn't blocked the same way |
 | Half the names resolve to nothing | Chain-specific naming, or a non-catalog chain | Create the list with what resolved, list the rest, offer the photo-receipt route |
 | Totals do not add up | Rows missed | Re-read the page before creating; do not create a list you know is incomplete |
