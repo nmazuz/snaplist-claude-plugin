@@ -22,10 +22,9 @@ drawing that conclusion.
 
 ## Authentication in an unattended run
 
-`mcp__snaplist__login` returns a `login_url` a human must open (Clerk). **This cannot be
-automated.** In a scheduled run, if login is not completed, report that and stop — that is a
-normal outcome, not a failure to work around. Never store, cache or write the `session_token`
-anywhere; it lives only in the run that obtained it.
+The connection is OAuth-authenticated by the client, with no login tool and no token argument.
+If a tool reports "Not signed in", reconnecting needs a human (Clerk sign-in in a browser):
+report that and stop. That is a normal outcome, not a failure to work around.
 
 ## The traps
 

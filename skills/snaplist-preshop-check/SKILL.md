@@ -13,8 +13,8 @@ This routine has no schedule — it runs when the user starts it.
 **First: read `${CLAUDE_PLUGIN_ROOT}/skills/snaplist/references/mcp-output-traps.md`** — auth
 rules, the price-history scoring method, and verified traps in this MCP's output.
 
-1. **Auth.** `mcp__snaplist__login` → the human opens `login_url` → `check_login`. If login is
-   not completed, say so and stop. Never store the session token.
+1. **Auth.** The Snaplist connection is already signed in (OAuth, stored by the client). If a
+   tool reports "Not signed in", report that the Snaplist connection needs reconnecting and stop.
 
 2. **Resolve the account.** `get_account_overview` → default `store_key` and the pinned list.
    Then `get_list_items` for that list. Note which items have `on_promo=false` — those are being

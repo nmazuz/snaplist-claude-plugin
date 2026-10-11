@@ -98,6 +98,6 @@ The plugin talks only to the MCP surface. The services behind it live elsewhere 
 - **`webInvoiceExtractor`** — the standalone Flask service behind `import_digital_receipt`.
 - **clerk-react-starter** (`smart-saver-webapp-ui`) — the web app.
 
-Note the auth split: `/mcp` verifies Clerk session JWTs and uses server-resolved opaque sessions,
-which is why this plugin's tools take a `session_token`. The legacy `/api/*` surface has no auth
+Note the auth split: `/mcp` is an OAuth resource server with Clerk as the authorization server —
+the client holds the tokens, so this plugin's tools take no token argument. The legacy `/api/*` surface has no auth
 at all — never call it from here.

@@ -39,24 +39,16 @@ tables, put the product or store name in the rightmost logical column.
 
 ## Rule 2: authenticate first
 
-No account tool works without a session. Before anything else:
+The Snaplist MCP connection is authenticated with OAuth: the client signed the user in through
+Clerk once and keeps the tokens in its own credential store (Claude Code uses the macOS
+Keychain), refreshing them silently. Every tool call already belongs to the signed-in user —
+there is no `login` tool and no token argument.
 
-1. Call `login`. It opens Clerk in the browser (local) or returns a `login_url` (remote — show
-   it, then poll `check_login`).
-2. Immediately store the returned `session_token` in private, session-scoped agent state.
-   Reuse that same token for every Snaplist tool call throughout the entire conversation,
-   including later turns and routines in the same live session. Do not ask the user to sign
-   in again while the token remains valid.
-3. Pass the stored token as the first argument to every account tool. Treat it as a secret:
-   never print it, quote it, summarise it, place it in a file, include it in logs or expose it
-   in a user-facing response.
-4. If a tool reports that the token expired or is invalid, discard the stored value, call
-   `login` again, and replace it with the newly returned token.
-5. Never ask for a password, and never accept one if offered — sign-in happens only inside
+1. Never ask for a password, and never accept one if offered — sign-in happens only inside
    Clerk.
-
-If the user asks for anything before signing in, say that Snaplist needs them signed in first
-and start the login — do not attempt the request.
+2. If a tool reports "Not signed in", the connection lost its credentials. Tell the user to
+   reconnect the Snaplist MCP server in their client (`/mcp` in Claude Code, or the connector
+   settings in the Claude app) and stop — do not attempt the request another way.
 
 ## Rule 3: purchase history before the catalog
 
@@ -89,7 +81,7 @@ silently give a generic answer as if it were personalised.
 
 ## Opening the conversation
 
-After login, call `get_account_overview` **before asking the user anything**. Greet them with
+At the start of every conversation, call `get_account_overview` **before asking the user anything**. Greet them with
 what it returns — their store, their current list, what they buy most — then follow
 `onboarding`:
 

@@ -14,9 +14,8 @@ Suggested cadence: Thursday morning, ahead of the main Israeli shopping day.
 rules, the price-history scoring method, the verified traps in this MCP's output, and the
 personalization-loop rules. All of it applies here.
 
-1. **Auth.** `mcp__snaplist__login` → the human opens `login_url` → `check_login`. If login is
-   not completed, report that this run needs a manual sign-in and stop. Never store the session
-   token.
+1. **Auth.** The Snaplist connection is already signed in (OAuth, stored by the client). If a
+   tool reports "Not signed in", report that the Snaplist connection needs reconnecting and stop.
 
 2. **Resolve the account.** `get_account_overview` → default `store_key` and
    `personalization.can_generate_list`. Never hardcode a store key.

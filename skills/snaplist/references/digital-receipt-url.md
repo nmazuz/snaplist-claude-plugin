@@ -12,7 +12,7 @@ correct date. Everything predictive in Snaplist — repurchase intervals, `due_i
 
 ### `import_digital_receipt` — the fast path
 
-`import_digital_receipt(session_token, url)` runs a server-side scraper over the page text and
+`import_digital_receipt(url)` runs a server-side scraper over the page text and
 returns `{items, barcodes, date, chain, confidence, extraction, unknown_candidates}`. Every
 candidate is checked against the catalog, so what it returns is real.
 
@@ -49,7 +49,7 @@ Fall back to this when any of the following is true:
 
 ### 1. Preconditions
 
-The user is signed in (`session_token` in hand) and has a default store, or is about to get one.
+The user is signed in and has a default store, or is about to get one.
 Ask for the URL if they have not pasted it.
 
 ### 2. Open and read the page
@@ -159,7 +159,6 @@ regex one — do not skip it to save a turn.
 
 ```
 create_list(
-    session_token,
     name="קניות {chain} {dd/mm}",
     items={barcode: qty, ...},
     source="Digital",

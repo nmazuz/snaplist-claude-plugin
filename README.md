@@ -69,16 +69,15 @@ due-item prediction. Three ways in:
 The routines are skills, so they run on demand. To run one unattended, register a scheduled task
 whose prompt is "Run the snaplist-new-promotions routine."
 
-One real constraint: **`login` needs a human.** It returns a Clerk URL somebody must open, so a
-scheduled run with no live session will report that it needs a manual sign-in and stop. That is
-expected. These routines are most useful started by hand at a moment that matters — before
-shopping, before the weekly shop — rather than fired at 3am.
+Sign-in is a one-time OAuth step: the client keeps the Clerk tokens and refreshes them, so a
+scheduled run on a machine that has connected Snaplist once is already signed in. If the
+connection has lost its credentials, the run reports that Snaplist needs reconnecting and stops.
 
 ## Privacy
 
 - Sign-in happens inside Clerk. The assistant never sees a password.
-- Session tokens live in agent memory for the run that obtained them, and are never written to
-  disk or shown in a response.
+- OAuth tokens are held by the client's credential store (macOS Keychain for Claude Code), never
+  by the assistant, and never appear in a response.
 - The only runtime state on disk is `~/.snaplist/promotions-seen.json` — barcodes and dates, so
   the same deals are not reported to you twice.
 - A receipt URL you paste goes to the Snaplist MCP and nowhere else.

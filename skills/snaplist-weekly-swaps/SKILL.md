@@ -13,9 +13,8 @@ Suggested cadence: weekly.
 **First: read `${CLAUDE_PLUGIN_ROOT}/skills/snaplist/references/mcp-output-traps.md`** — auth
 rules and the verified traps in this MCP's output. Everything below depends on it.
 
-1. **Auth.** `mcp__snaplist__login` → the human opens `login_url` → `check_login`. If login is
-   not completed, report that this run needs a manual sign-in and stop. Never store the session
-   token.
+1. **Auth.** The Snaplist connection is already signed in (OAuth, stored by the client). If a
+   tool reports "Not signed in", report that the Snaplist connection needs reconnecting and stop.
 
 2. **Resolve the store and list.** `get_account_overview` → default `store_key` and the pinned
    list. Never hardcode a store key.

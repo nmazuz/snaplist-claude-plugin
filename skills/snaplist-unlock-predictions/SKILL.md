@@ -16,8 +16,8 @@ Background: below three receipts, `suggest_additions` returns all three of its b
 unavailable — the whole predictive layer sits behind that threshold. For a new account, reaching
 it is the single highest-return action available.
 
-1. **Auth.** `mcp__snaplist__login` → the human opens `login_url` → `check_login`. If login is
-   not completed, stop quietly — do not send a nag the user cannot act on.
+1. **Auth.** The Snaplist connection is already signed in (OAuth, stored by the client). If a
+   tool reports "Not signed in", stop quietly — do not send a nag the user cannot act on.
 
 2. `get_account_overview` → `personalization.receipts` and `personalization.can_generate_list`.
 

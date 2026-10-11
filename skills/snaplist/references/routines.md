@@ -35,19 +35,18 @@ Two things to tell the user when setting this up:
 For a check inside the current session instead of a scheduled one, the `/loop` skill runs a
 prompt on an interval.
 
-## The unattended-login constraint
+## Authentication in unattended runs
 
-`login` returns a Clerk `login_url` that a human must open. **No routine can authenticate on its
-own.** A scheduled run that finds no live session should report that it needs a manual sign-in
-and stop. That is a normal outcome, not a failure to engineer around — and it is why these
-routines are most useful started by hand at a moment that matters (before shopping, before the
-weekly shop) rather than fired blindly at 3am.
+The MCP connection uses OAuth: the client signed the user in through Clerk once and refreshes
+the tokens itself, so a scheduled run is normally already signed in. If a tool reports "Not
+signed in", the stored credentials are gone; report that Snaplist needs reconnecting and stop.
+That needs a human, and is a normal outcome rather than something to engineer around.
 
 ## State
 
 Only `snaplist-new-promotions` keeps state: `~/.snaplist/promotions-seen.json`, holding the
 promotion keys already reported so the same deals are not repeated every run. It contains
-barcodes and dates only — no secrets, no session tokens.
+barcodes and dates only — no secrets, no tokens.
 
 Drop entries whose end date has passed on each run, so the file does not grow forever and a
 promotion that returns later is reported again.

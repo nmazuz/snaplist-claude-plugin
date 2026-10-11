@@ -16,8 +16,8 @@ rules, the scoring method, and the verified traps in the MCP output. Everything 
 
 ## Steps
 
-1. **Auth.** `mcp__snaplist__login` → human opens `login_url` → `check_login`. If login is not
-   completed, report that this run needs a manual sign-in and stop. Do not retry in a loop.
+1. **Auth.** The Snaplist connection is already signed in (OAuth, stored by the client). If a
+   tool reports "Not signed in", report that the Snaplist connection needs reconnecting and stop.
 
 2. **Resolve the store.** `get_account_overview` → the default `store_key`. Use it for every
    store-scoped call below. Never hardcode one.
